@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 
-import Home from "./containers/Home";
-import Year2021 from "./containers/Year2021";
-import NotFound from "./containers/NotFound";
+import Home from "./pages/Home";
+import Year2021 from "./pages/Year2021";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   return (
