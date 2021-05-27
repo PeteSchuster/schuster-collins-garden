@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink,
+} from "react-router-dom";
 
 import Home from "./pages/Home";
 import Year2021 from "./pages/Year2021";
@@ -10,8 +15,14 @@ const App = () => {
       <div class="app">
         <header class="page-header" role="banner">
           <nav>
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/2021">This Year</NavLink>
+            {[
+              { name: "Home", to: "/" },
+              { name: "This Year", to: "/2021" },
+            ].map(({ name, to }) => (
+              <NavLink className="text-black p-2" to={to}>
+                {name}
+              </NavLink>
+            ))}
           </nav>
         </header>
         <main class="page-main">
@@ -27,8 +38,7 @@ const App = () => {
             </Route>
           </Switch>
         </main>
-        <footer class="page-footer" role="content-info">
-        </footer>
+        <footer class="page-footer" role="content-info"></footer>
       </div>
     </Router>
   );

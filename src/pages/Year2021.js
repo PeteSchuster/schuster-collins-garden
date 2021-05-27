@@ -5,24 +5,25 @@ import Plant from "../components/Plant";
 const getSheetUrl = () => {
   var query_params = new URLSearchParams();
 
-  return 'https://sheet2api.com/v1/buZzH9esQOyx/perennial-garden-data/Plants?' + query_params;
+  return (
+    "https://sheet2api.com/v1/buZzH9esQOyx/perennial-garden-data/Plants?" +
+    query_params
+  );
 };
 
-
-
 const Year2021 = () => {
-  const [ plants, setPlants ] = useState([]);
-  const [ loading, setLoading ] = useState(true);
+  const [plants, setPlants] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getData = async () => {
-    const url = getSheetUrl();    
-      try {
-        const data = await fetch(url).then(response => response.json());
-        setPlants(data);
-        setLoading(false);
-      } catch (e) {
-        setLoading(false);
-      }
+    const url = getSheetUrl();
+    try {
+      const data = await fetch(url).then((response) => response.json());
+      setPlants(data);
+      setLoading(false);
+    } catch (e) {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -34,7 +35,9 @@ const Year2021 = () => {
       <h1>2021</h1>
 
       {loading && "loading"}
-      {plants.map(plant => <Plant {...plant} />)}
+      {plants.map((plant) => (
+        <Plant {...plant} />
+      ))}
     </div>
   );
 };
