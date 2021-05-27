@@ -14,15 +14,19 @@ const Year2021 = () => {
   const [ plants, setPlants ] = useState([]);
   const [ loading, setLoading ] = useState(true);
 
-  useEffect(async () => {
+  const getData = async () => {
     const url = getSheetUrl();    
-    try {
-      const data = await fetch(url).then(response => response.json());
-      setPlants(data);
-      setLoading(false);
-    } catch (e) {
-      setLoading(false);
-    }
+      try {
+        const data = await fetch(url).then(response => response.json());
+        setPlants(data);
+        setLoading(false);
+      } catch (e) {
+        setLoading(false);
+      }
+  };
+
+  useEffect(() => {
+    getData();
   }, []);
 
   return (
