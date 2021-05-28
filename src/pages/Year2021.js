@@ -16,6 +16,8 @@ const Year2021 = () => {
   const [trackedPlants, setTrackedPlants] = useState({});
   const [loading, setLoading] = useState(true);
 
+  console.log({ trackedPlants });
+
   const getData = async () => {
     const url = getSheetUrl();
     try {
@@ -41,10 +43,12 @@ const Year2021 = () => {
     const updatedPlant = {};
     updatedPlant[name] = count;
 
-    setTrackedPlants({
+    const payload = {
       ...trackedPlants,
       ...updatedPlant,
-    });
+    };
+
+    setTrackedPlants(previousState => ({ ...previousState, ...updatedPlant }));
   };
 
   return (
@@ -59,8 +63,8 @@ const Year2021 = () => {
         return (<span>{name}: {qty}</span>);
       })}
 
-      {plants.map((plant) => (
-        <Plant track={track} {...plant} />
+      {plants.map((plant, key) => (
+        <Plant key={key} track={track} {...plant} />
       ))}
     </div>
   );
