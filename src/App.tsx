@@ -12,8 +12,8 @@ import NotFound from "./pages/NotFound";
 const App = () => {
   return (
     <Router>
-      <div class="app">
-        <header class="page-header" role="banner">
+      <div className="app">
+        <header className="page-header" role="banner">
           <nav>
             {[
               { name: "Home", to: "/" },
@@ -25,7 +25,7 @@ const App = () => {
             ))}
           </nav>
         </header>
-        <main class="page-main">
+        <main className="page-main">
           <Switch>
             <Route exact path="/">
               <Home />
@@ -38,7 +38,7 @@ const App = () => {
             </Route>
           </Switch>
         </main>
-        <footer class="page-footer" role="content-info"></footer>
+        <footer className="page-footer" role="content-info"></footer>
       </div>
     </Router>
   );

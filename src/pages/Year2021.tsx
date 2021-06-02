@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 import Plant from "../components/Plant";
 
+// TODO use service worker?
+// Add to localstorage?
 const getSheetUrl = () => {
   var query_params = new URLSearchParams();
 
@@ -11,12 +13,12 @@ const getSheetUrl = () => {
   );
 };
 
+type TrackedPlant = Record<string, number>;
+
 const Year2021 = () => {
   const [plants, setPlants] = useState([]);
-  const [trackedPlants, setTrackedPlants] = useState({});
+  const [trackedPlants, setTrackedPlants] = useState<TrackedPlant>({});
   const [loading, setLoading] = useState(true);
-
-  console.log({ trackedPlants });
 
   const getData = async () => {
     const url = getSheetUrl();
@@ -33,20 +35,15 @@ const Year2021 = () => {
     getData();
   }, []);
 
-  const track = (name) => {
+  const track = (name: string): void => {
     let count = 1;
 
     if (trackedPlants[name]) {
       count += trackedPlants[name];
     }
 
-    const updatedPlant = {};
+    const updatedPlant: TrackedPlant = {};
     updatedPlant[name] = count;
-
-    const payload = {
-      ...trackedPlants,
-      ...updatedPlant,
-    };
 
     setTrackedPlants(previousState => ({ ...previousState, ...updatedPlant }));
   };
@@ -62,6 +59,8 @@ const Year2021 = () => {
 
         return (<span>{name}: {qty}</span>);
       })}
+
+      Locations
 
       {plants.map((plant, key) => (
         <Plant key={key} track={track} {...plant} />
