@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 
 import Plant from "../components/Plant";
+import { Plot } from "../components/Tile";
+import PlantsMock from "../mock/plants.json";
 
 // TODO use service worker?
 // Add to localstorage?
@@ -8,8 +10,7 @@ const getSheetUrl = () => {
   var query_params = new URLSearchParams();
 
   return (
-    "https://sheet2api.com/v1/buZzH9esQOyx/perennial-garden-data/Plants?" +
-    query_params
+    "https://sheet2api.com/v1/buZzH9esQOyx/perennial-garden-data/Plants?" + query_params
   );
 };
 
@@ -23,7 +24,8 @@ const Year2021 = () => {
   const getData = async () => {
     const url = getSheetUrl();
     try {
-      const data = await fetch(url).then((response) => response.json());
+      // const data = await fetch(url).then((response) => response.json());
+      const data = PlantsMock as [];
       setPlants(data);
       setLoading(false);
     } catch (e) {
@@ -56,15 +58,20 @@ const Year2021 = () => {
 
       {Object.keys(trackedPlants).map(name => {
         const qty = trackedPlants[name];
-
+        
         return (<span>{name}: {qty}</span>);
       })}
 
-      Locations
+      <h2>Locations</h2>
 
-      {plants.map((plant, key) => (
-        <Plant key={key} track={track} {...plant} />
-      ))}
+      <div className="plants">
+        {plants.map((plant, key) => (
+          <Plot>
+            <Plant key={key} track={track} {...plant} />
+          </Plot>
+        ))}
+      </div>
+      
     </div>
   );
 };
