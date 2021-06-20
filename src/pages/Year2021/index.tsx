@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-import Plant from "../components/Plant";
-import { Plot } from "../components/Tile";
-import PlantsMock from "../mock/plants.json";
+import Plant from "../../components/Plant";
+import { Plot } from "../../components/Tile";
+import PlantsMock from "../../mock/plants.json";
 
 // TODO use service worker?
 // Add to localstorage?
