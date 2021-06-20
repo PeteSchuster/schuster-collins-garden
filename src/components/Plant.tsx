@@ -57,9 +57,13 @@ const PlantModal: React.FC<PlantModalProps> = ({ modalIsOpen, closeModal, plant 
 const Plant: React.FC<PlantProps> = (props) => {
   const { name, track } = props;
 
-  useEffect(() => {
+  const trackPlant = () => {
     track(name);
-  }, [name]);
+  };
+
+  useEffect(() => {
+    trackPlant();
+  }, []);
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
