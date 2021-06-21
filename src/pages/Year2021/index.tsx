@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 
-import Plant from "../../components/Plant";
-import { Plot } from "../../components/Tile";
+import { PlantData } from "../../components/Plant";
+import Location from "../../components/Location";
 import PlantsMock from "../../mock/plants.json";
+import { leftGate, rightGate } from "./data";
+
 
 // TODO use service worker?
 // Add to localstorage?
@@ -17,7 +19,7 @@ const getSheetUrl = () => {
 type TrackedPlant = Record<string, number>;
 
 const Year2021 = () => {
-  const [plants, setPlants] = useState([]);
+  const [plants, setPlants] = useState<PlantData[]>([]);
   const [trackedPlants, setTrackedPlants] = useState<TrackedPlant>({});
   const [loading, setLoading] = useState(true);
 
@@ -64,13 +66,11 @@ const Year2021 = () => {
 
       <h2>Locations</h2>
 
-      <div className="plants">
-        {plants.map((plant, key) => (
-          <Plot>
-            <Plant key={key} track={track} {...plant} />
-          </Plot>
-        ))}
-      </div>
+      <h3>Left Gate</h3>
+      <Location plantRows={leftGate} plants={plants} />
+      
+      <h3>Right Gate</h3>
+      <Location plantRows={rightGate} plants={plants} />
       
     </div>
   );

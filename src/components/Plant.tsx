@@ -14,13 +14,16 @@ const customStyles = {
 
 Modal.setAppElement('#root');
 
-type PlantProps = {
+export type PlantData = {
   name: string;
   qty: number;
   color: string;
   nickname: string;
   height: string;
   link: string;
+}
+
+export type PlantProps = PlantData & {
   track: (name: string) => void;
 }
 
